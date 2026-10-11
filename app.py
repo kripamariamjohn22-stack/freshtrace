@@ -20,10 +20,13 @@ DB_CONFIG = {
 # When the app runs online (Streamlit Community Cloud), the connection details
 # come from the hosting site's "Secrets" box instead of this file, so the
 # password is never uploaded to GitHub.
+SECRETS_NOTE = "No [mysql] secrets found, so the local settings in DB_CONFIG are used."
 try:
-    DB_CONFIG = {k: (int(v) if k == "port" else v) for k, v in st.secrets["mysql"].items()}
-except Exception:
-    pass   # no secrets found -> running on your laptop -> use DB_CONFIG above
+    if "mysql" in st.secrets:
+        DB_CONFIG = {k: (int(v) if k == "port" else v) for k, v in st.secrets["mysql"].items()}
+        SECRETS_NOTE = "Using the [mysql] secrets."
+except Exception as e:      # e.g. the Secrets box has a typo and cannot be read
+    SECRETS_NOTE = f"The Secrets box could not be read: {e}"
 
 def get_conn():
     return mysql.connector.connect(**DB_CONFIG)
@@ -178,7 +181,8 @@ try:
     get_conn().close()
 except mysql.connector.Error as e:
     st.error(f"Cannot connect to MySQL: {e}")
-    st.info("Check that MySQL is running, the password in DB_CONFIG is correct, and the database 'freshtrace' exists.")
+    st.info(f"Trying host '{DB_CONFIG.get('host')}', port {DB_CONFIG.get('port', 3306)}, "
+            f"user '{DB_CONFIG.get('user')}'. {SECRETS_NOTE}")
     st.stop()
 
 # =====================================================================

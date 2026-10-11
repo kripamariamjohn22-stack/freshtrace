@@ -2,7 +2,7 @@
 
 FreshTrace is a MySQL database with a Streamlit web app on top. It tracks every raw-material lot from the supplier, through production batches, to every shop that received the finished product. When a lot turns out to be unsafe, the factory can see in seconds which batches and shops are affected, and anyone holding a packet can check if it is safe by typing its batch code.
 
-Built as my DBMS mini project (EDA201-3N), BSc Data Science and Artificial Intelligence, Semester III, CHRIST (Deemed to be University), Delhi NCR.
+Built as my DBMS mini project, BSc Data Science and Artificial Intelligence, CHRIST (Deemed to be University), Delhi NCR.
 
 ![Check a product page](preview.png)
 

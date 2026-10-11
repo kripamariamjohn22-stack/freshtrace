@@ -4,6 +4,8 @@ FreshTrace is a MySQL database with a Streamlit web app on top. It tracks every 
 
 Built as my DBMS mini project, BSc Data Science and Artificial Intelligence, CHRIST (Deemed to be University), Delhi NCR.
 
+**Live app:** https://freshtrace-4fdhega5rrknilwc5kkctm.streamlit.app/
+
 ![Check a product page](preview.png)
 
 ## The problem
